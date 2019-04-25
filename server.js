@@ -13,10 +13,14 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  //
+  app.get('*', (req, res) => {
+    res.sendfile(path.join(__dirname = 'client/build/index.html'));
+  })
 }
-
+//build mode
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
@@ -73,6 +77,11 @@ todoRoutes.route('/update/:id').post(function(req, res) {
 
 app.use('/todos', todoRoutes);
 
-app.listen(PORT, function() {
-  console.log("Server is running on Port: " + PORT);
-});
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+})
+
+//start server
+app.listen(PORT, (req, res) => {
+  console.log( `server listening on PORT: ${PORT}`);
+})
