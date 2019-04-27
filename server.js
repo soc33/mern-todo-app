@@ -22,7 +22,7 @@ if(process.env.NODE_ENV === 'production') {
   })
 }
 //build mode
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://heroku_jckt15hn:heroku_jckt15hn@ds147746.mlab.com:47746/heroku_jckt15hn', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
