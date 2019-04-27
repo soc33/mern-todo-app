@@ -22,7 +22,8 @@ if(process.env.NODE_ENV === 'production') {
   })
 }
 //build mode
-mongoose.connect(process.env.MONGOLAB_URI, { useNewUrlParser: true });
+let url = process.env.MONGOLAB_URI
+mongoose.connect(url, { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
